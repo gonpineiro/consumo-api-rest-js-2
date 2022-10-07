@@ -1,9 +1,17 @@
-const BASE_URL = 'https://api.themoviedb.org/3/'
+
+const api = axios.create({
+    baseURL: 'https://api.themoviedb.org/3/',
+    headers: {
+        'Content-Type': 'applicaction/json;charset=utf-8'
+    },
+    params: {
+        'api_key': API_KEY
+    }
+});
 
 /* https://developers.themoviedb.org/3/trending/get-trending */
 const getTrendingMoviesPreview = async () => {
-    const res = await fetch(BASE_URL + 'trending/movie/day?api_key=' + API_KEY)
-    const data = await res.json()
+    const { data } = await api('trending/movie/day')
 
     const movies = data.results
 
@@ -25,11 +33,9 @@ const getTrendingMoviesPreview = async () => {
 
 /* https://developers.themoviedb.org/3/genres/get-movie-list */
 const getCategoriesPreview = async () => {
-    const res = await fetch(BASE_URL + '/genre/movie/list?api_key=' + API_KEY)
-    const data = await res.json()
+    const { data } = await api('/genre/movie/list')
 
     const categories = data.genres
-    console.log(categories);
 
     categories.forEach(categorie => {
         const previewCategoriesPreviewContainer = document.querySelector('#categoriesPreview .categoriesPreview-list')
@@ -46,5 +52,6 @@ const getCategoriesPreview = async () => {
         previewCategoriesPreviewContainer.appendChild(categorieContainer)
     });
 }
+
 getTrendingMoviesPreview()
 getCategoriesPreview()
