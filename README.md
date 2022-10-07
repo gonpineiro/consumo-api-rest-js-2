@@ -9,3 +9,5 @@
 `https://developers.themoviedb.org/3/discover/movie`
 ### Busca una pelicula
 `https://developers.themoviedb.org/3/search/movie`
+### Busca una pelicula por ID
+`https://developers.themoviedb.org/3/movie/{movie_id}`
