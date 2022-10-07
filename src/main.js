@@ -106,9 +106,9 @@ const getTrendingMovies = async () => {
 /* https://developers.themoviedb.org/3/movie/{movie_id}*/
 const getMovieById = async (id) => {
     const { data: movie } = await api('movie/' + id)
+    getRelatedMoviesId(id)
 
     const movieImgUrl = 'https://image.tmdb.org/t/p/w300/' + movie.poster_path
-    console.log(movieImgUrl);
     headerSection.style.background = `
         linear-gradient(
             180deg, 
@@ -124,3 +124,11 @@ const getMovieById = async (id) => {
     createCategories(movie.genres, movieDetailCategoriesList)
 }
 
+
+const getRelatedMoviesId = async (id) => {
+    const { data } = await api(`movie/${id}/recommendations`)
+
+    const relatedMovies = data.results
+
+    createMovies(relatedMovies, relatedMoviesContainer)
+} 

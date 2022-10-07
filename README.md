@@ -11,3 +11,5 @@
 `https://developers.themoviedb.org/3/search/movie`
 ### Busca una pelicula por ID
 `https://developers.themoviedb.org/3/movie/{movie_id}`
+### Busca recomendaciones por ID de pelicula
+`https://developers.themoviedb.org/3/movie/{movie_id}/recommendations`
