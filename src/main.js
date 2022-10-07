@@ -69,12 +69,21 @@ const getCategoriesPreview = async () => {
     createCategories(categories, categoriesPreviewList)
 }
 
-/* https://developers.themoviedb.org/3/trending/get-trending */
+/* https://developers.themoviedb.org/3/discover/movie */
 const getMovieByCategories = async (id) => {
     const { data } = await api('discover/movie', {
-        params: {
-            with_genres: id
-        }
+        params: { with_genres: id }
+    })
+
+    const movies = data.results
+
+    createMovies(movies, genericSection)
+}
+
+/* https://developers.themoviedb.org/3/search/movie */
+const getMoviesBySearch = async (query) => {
+    const { data } = await api('search/movie', {
+        params: { query }
     })
 
     const movies = data.results
