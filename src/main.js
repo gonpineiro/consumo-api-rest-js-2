@@ -9,13 +9,10 @@ const api = axios.create({
     }
 });
 
-/* https://developers.themoviedb.org/3/trending/get-trending */
-const getTrendingMoviesPreview = async () => {
-    const { data } = await api('trending/movie/day')
+/* Utils */
 
-    const movies = data.results
-
-    trendingMoviesPreviewList.innerHTML = '';
+const createMovies = (movies, container) => {
+    container.innerHTML = ''
 
     movies.forEach(movie => {
         const movieContainer = document.createElement('div')
@@ -27,17 +24,13 @@ const getTrendingMoviesPreview = async () => {
         movieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w300/' + movie.poster_path)
 
         movieContainer.appendChild(movieImg);
-        trendingMoviesPreviewList.appendChild(movieContainer)
+        container.appendChild(movieContainer)
     });
 }
 
-/* https://developers.themoviedb.org/3/genres/get-movie-list */
-const getCategoriesPreview = async () => {
-    const { data } = await api('/genre/movie/list')
 
-    const categories = data.genres
-
-    categoriesPreviewList.innerHTML = ''
+const createCategories = (categories, container) => {
+    container.innerHTML = ''
 
     categories.forEach(categorie => {
         const categorieContainer = document.createElement('div')
@@ -52,8 +45,28 @@ const getCategoriesPreview = async () => {
         categorieTitle.textContent = categorie.name
 
         categorieContainer.appendChild(categorieTitle);
-        categoriesPreviewList.appendChild(categorieContainer)
+        container.appendChild(categorieContainer)
     });
+}
+
+/* Llamadas API */
+
+/* https://developers.themoviedb.org/3/trending/get-trending */
+const getTrendingMoviesPreview = async () => {
+    const { data } = await api('trending/movie/day')
+
+    const movies = data.results
+
+    createMovies(movies, trendingMoviesPreviewList)
+}
+
+/* https://developers.themoviedb.org/3/genres/get-movie-list */
+const getCategoriesPreview = async () => {
+    const { data } = await api('/genre/movie/list')
+
+    const categories = data.genres
+
+    createCategories(categories, categoriesPreviewList)
 }
 
 /* https://developers.themoviedb.org/3/trending/get-trending */
@@ -66,18 +79,5 @@ const getMovieByCategories = async (id) => {
 
     const movies = data.results
 
-    genericSection.innerHTML = '';
-
-    movies.forEach(movie => {
-        const movieContainer = document.createElement('div')
-        movieContainer.classList.add('movie-container')
-
-        const movieImg = document.createElement('img');
-        movieImg.classList.add('movie-img');
-        movieImg.setAttribute('alt', movie.title)
-        movieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w300/' + movie.poster_path)
-
-        movieContainer.appendChild(movieImg);
-        genericSection.appendChild(movieContainer)
-    });
+    createMovies(movies, genericSection)
 }
