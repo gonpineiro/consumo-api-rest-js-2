@@ -28,7 +28,6 @@ const createMovies = (movies, container) => {
     });
 }
 
-
 const createCategories = (categories, container) => {
     container.innerHTML = ''
 
@@ -85,6 +84,15 @@ const getMoviesBySearch = async (query) => {
     const { data } = await api('search/movie', {
         params: { query }
     })
+
+    const movies = data.results
+
+    createMovies(movies, genericSection)
+}
+
+/* https://developers.themoviedb.org/3/trending/get-trending */
+const getTrendingMovies = async () => {
+    const { data } = await api('trending/movie/day')
 
     const movies = data.results
 

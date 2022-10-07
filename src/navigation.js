@@ -8,7 +8,7 @@ trendingBtn.addEventListener('click', () => {
 })
 
 arrowBtn.addEventListener('click', () => {
-    location.hash = 'home'
+    history.back();
 })
 
 const navigator = () => {
@@ -43,6 +43,10 @@ const trendsPage = () => {
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+
+    headerCategoryTitle.innerHTML = 'Tendencias'
+
+    getTrendingMovies()
 }
 
 const searchPage = () => {
