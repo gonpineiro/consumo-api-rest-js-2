@@ -15,9 +15,9 @@ const getTrendingMoviesPreview = async () => {
 
     const movies = data.results
 
-    movies.forEach(movie => {
-        const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-movieList')
+    trendingMoviesPreviewList.innerHTML = '';
 
+    movies.forEach(movie => {
         const movieContainer = document.createElement('div')
         movieContainer.classList.add('movie-container')
 
@@ -37,9 +37,9 @@ const getCategoriesPreview = async () => {
 
     const categories = data.genres
 
-    categories.forEach(categorie => {
-        const categoriesPreviewList = document.querySelector('#categoriesPreview .categoriesPreview-list')
+    categoriesPreviewList.innerHTML = ''
 
+    categories.forEach(categorie => {
         const categorieContainer = document.createElement('div')
         categorieContainer.classList.add('category-container')
 
