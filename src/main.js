@@ -52,6 +52,3 @@ const getCategoriesPreview = async () => {
         previewCategoriesPreviewContainer.appendChild(categorieContainer)
     });
 }
-
-getTrendingMoviesPreview()
-getCategoriesPreview()
